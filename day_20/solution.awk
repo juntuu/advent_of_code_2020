@@ -1,22 +1,34 @@
 #!/usr/bin/awk -f
 
-function _rev(s,n) { return n>1 ? substr(s,n,1) _rev(substr(s,2,n-2),n-2) substr(s,1,1) : s }
-function rev(s,n) { return _rev(s, length(s)) }
-function flip(_i) { for (_i = 1; _i <= NF; _i++) $_i = rev($_i); gsub(/ /, "\n") }
+function rev(s, _n, _o) {
+	for (_n=length(s); _n;)
+		_o = _o substr(s, _n-- ,1)
+	return _o
+}
+
+function flip(_i) {
+	for (_i = 1; _i <= NF; _i++)
+		$_i = rev($_i)
+}
+
 function rot(_t, _i, _a, _j) {
 	for (_i = 1; _i <= NF; _i++) { _t[_i] = $_i; $_i = "" }
 	for (_i = NF; _i > 0; _i--) {
 		split(_t[_i], _a, "")
 		for (_j in _a) $_j = $_j _a[_j]
 	}
-	gsub(/ /, "\n")
 }
-function left(_i,_t){for(_i=1;_i<=NF;_i++) _t=_t substr($_i,1,1);return _t}
-function right(_i,_t){for(_i=1;_i<=NF;_i++) _t=_t substr($_i,length($_i),1);return _t}
+
+function left(_n, _i, _t) {
+	for(_i = 1; _i <= NF; _i++)
+		_t = _t substr($_i, _n, 1)
+	return _t
+}
+
+function right() { return left(length($1)) }
 
 function remove_opt(x, y, t) {
 	if ((x,y) in image) {
-		gsub(o, "", O[t])
 		gsub(image[x,y], "", O[t])
 		gsub(t, "", O[image[x,y]])
 	}
@@ -51,10 +63,13 @@ function build(t, _x, _i, _o) {
 	}
 }
 
-function rule(x, y) { return (x,y) in image ? edges[image[x,y]] : "" }
+function rule(x, y) { return edges[image[x,y]] }
 
 function ok(x, y) {
-	return $1 ~ rule(x, y-1) && $NF ~ rule(x, y+1) && left() ~ rule(x-1, y) && right() ~ rule(x+1, y)
+	return $1 ~ rule(x, y-1) &&
+		$NF ~ rule(x, y+1) &&
+		left() ~ rule(x-1, y) &&
+		right() ~ rule(x+1, y)
 }
 
 function resolve(x, y, _i) {
@@ -88,7 +103,8 @@ function join(a, _s, _i) {
 function mark(a, b, s, _a, _s) {
 	split($a, _a, "")
 	split(s, _s, "")
-	for (s in _s) if (_s[s] == "#") _a[b+s-1] = "O"
+	for (s in _s)
+		_s[s]=="#" && _a[b+s-1]="O"
 	$a = join(_a)
 }
 
@@ -149,18 +165,18 @@ END {
 			corner = id
 		}
 	}
-	print part1, (part1 == 19955159604613)
+	print part1
 
 	N = sqrt(NR)
 	build(corner)
-	for (i = 1; i <= N; i++) for (j = 1; j <= N; j++) resolve(i, j)
+	for (i = 1; i <= N; i++)
+		for (j = 1; j <= N; j++) resolve(i, j)
 
 	$0 = assemble()
-	for (i=0; i++ < 8;) {
-		if (scan()) break
+	for (i=0; i++ < 8 && !scan();) {
 		rot()
-		if (_i == 4) flip()
+		if (i==4) flip()
 	}
 	part2 = gsub(/#/, "")
-	print part2, (part2 == 1639)
+	print part2
 }

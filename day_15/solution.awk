@@ -1,22 +1,20 @@
 #!/usr/bin/awk -f
 
 function play(limit, _n) {
-	for (;i < limit; i++) {
+	for (;NR < limit; NR++) {
 		_n = said[prev]
-		said[prev] = i
-		prev = _n ? i - _n : 0
+		said[prev] = NR
+		prev = _n ? NR - _n : 0
 	}
 	return prev
 }
 
-BEGIN { FS = "," }
+BEGIN { RS = "," }
 
-{
-	for (i = 1; i < NF; i++) said[$i] = i
-	prev = $NF
-}
+{ said[$1] = NR }
 
 END {
+	prev = said[NR]
 	print play(2020)
 	print play(3e7)
 }

@@ -10,13 +10,18 @@ function parse(_i, _x, _y, _z, _d) {
 	return _x " " _y " " _z
 }
 
-function step(tiles, _n, _k, _p, _d) {
+function step(tiles, _n, _k, _p, _d, _x, _y, _z) {
 	for (_k in tiles) {
 		split(_k, _p)
-		for (_k in dir) {
-			split(dir[_k], _d)
-			_n[_p[1]+_d[1],_p[2]+_d[2],_p[3]+_d[3]]++
-		}
+		_x = _p[1]
+		_y = _p[2]
+		_z = _p[3]
+		_n[_x+1,_y,_z-1]++
+		_n[_x,_y+1,_z-1]++
+		_n[_x-1,_y+1,_z]++
+		_n[_x-1,_y,_z+1]++
+		_n[_x,_y-1,_z+1]++
+		_n[_x+1,_y-1,_z]++
 	}
 	for (_k in tiles) {
 		if (!_n[_k] || _n[_k] > 2)

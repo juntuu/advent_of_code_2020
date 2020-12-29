@@ -13,13 +13,13 @@ function set(cups, max, _i) {
 	return initial[1]
 }
 
-function run(cups, max, rounds, _c, _p1, _p3, _d, _b) {
+function run(cups, max, rounds, _c, _p1, _p2, _p3, _d) {
 	for (_c = set(cups, max); rounds--; _c = cups[_c]) {
-		delete _b
 		_p1 = cups[_d = _c]
-		_p3 = cups[cups[_p1]]
-		_b[_p1] = _b[cups[_p1]] = _b[_p3] = 1
-		do --_d || _d = max; while (_b[_d])
+		_p2 = cups[_p1]
+		_p3 = cups[_p2]
+		do --_d || _d = max
+		while (_d == _p1 || _d == _p2 || _d == _p3)
 		cups[_c] = cups[_p3]
 		cups[_p3] = cups[_d]
 		cups[_d] = _p1

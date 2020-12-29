@@ -18,13 +18,17 @@ function adjacent_seats(pos, _k, _a, _dx, _dy, _res) {
 	return _res
 }
 
-function step(from, to, _a, _i, _n, _k) {
+function step(from, to, _a, _i, _n, _k, _lim) {
 	for (_k in adjacent) {
 		split(adjacent[_k], _a)
 		_n = 0
-		for (_i in _a) _n += from[_a[_i]]
-		to[_k] = _n <= (3+part)*from[_k]
-		if (to[_k] == from[_k]) delete adjacent[_k]
+		_lim = (3+part)*from[_k]
+		for (_i in _a) {
+			_n += from[_a[_i]]
+			if (_n > _lim) break
+		}
+		if (!(to[_k] = _n <= _lim) == !_lim)
+			delete adjacent[_k]
 	}
 	for (_k in adjacent) return 1
 }

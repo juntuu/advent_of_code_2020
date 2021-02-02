@@ -1,6 +1,6 @@
 ## Advent of Code 2020 in Awk
 
-Each day's solution solves both part of the puzzle for that day. The answers
+Each day's solution solves both parts of the puzzle for that day. The answers
 are printed on separate lines. Input can be provided to standard in.
 
 For the problem descriptions, and to get your own input, head over to

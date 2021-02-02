@@ -1,6 +1,6 @@
 ## Advent of Code 2020 in Awk
 
-Each day's solution solves both part of the puzzle for that day. The answers
+Each day's solution solves both parts of the puzzle for that day. The answers
 are printed on separate lines. Input can be provided to standard in.
 
 For the problem descriptions, and to get your own input, head over to
@@ -24,11 +24,10 @@ Check `tldr.awk` for short and sweat solutions for all the problems.
 **Note worthy**:
 - the form factor is "less than 5 lines at 80 columns" to fit within the
   [r/adventofcode](https://www.reddit.com/r/adventofcode/) Megathread format
-- these are not runnable as is, you can copy/paste the relevant section,
+- the file is not runnable as is, you can copy/paste the relevant section,
   and run it separately
-- these may rely on specific, non standard, behaviour (e.g. [this fix](
-  onetrueawk/awk@ffee7780fe08fa77f662a0903477545d9e26334f) breaks day 17
-  formatting)
+- these may rely on specific, non standard, behaviour (e.g.
+  [this fix](https://github.com/onetrueawk/awk/pull/75) breaks day 17 formatting)
 - there is one day (20), with only part 1 solution, otherwise, each solves both
   parts
 - the algorithms used may not always be as efficient as the more verbose ones,

@@ -24,7 +24,7 @@ Check `tldr.awk` for short and sweat solutions for all the problems.
 **Note worthy**:
 - the form factor is "less than 5 lines at 80 columns" to fit within the
   [r/adventofcode](https://www.reddit.com/r/adventofcode/) Megathread format
-- these are not runnable as is, you can copy/paste the relevant section,
+- the file is not runnable as is, you can copy/paste the relevant section,
   and run it separately
 - these may rely on specific, non standard, behaviour (e.g.
   [this fix](https://github.com/onetrueawk/awk/pull/75) breaks day 17 formatting)

@@ -23,10 +23,10 @@ BEGIN {FS=RS;RS=z}{delete a
 for   (j in a)B+=+a[j]==NF}
 END   {print A;print B}i=!i
 # day 07 ######################################################################
-function f(b,x,u,s,c,n,a){sub(/[0-9]+ /,"",b);if(s[b])return 0;n=split(x[b],a,
-RS);s[b]=u;for(;--n>0;)c+=a[n]*f(a[n],x,u,s,1);return c}!/no other b/{for(k=5;
-k<NF;k+=2){o[b]=1FS$1"/"$2RS o[b=$++k"/"$++k];i[$1,$2]=$(k-2)" "b"\n"i[$1,$2]}
-}BEGIN{SUBSEP="/"}END{print f("shiny/gold",o,"1 one");print f("shiny/gold",i)}
+function H(a,v,e,r,s,c,k){sub(/[0-9]+ /,"",a);if(r[a])return 0;c=split(v[a],k,
+RS);r[a]=e;for(;--c>0;)s+=k[c]*H(k[c],v,e,r,1);return s}!/no other a/{for(j=5;
+j<NF;j+=2){o[a]=1FS$1"/"$2RS o[a=$++j"/"$++j];i[$1,$2]=$(j-2)" "a"\n"i[$1,$2]}
+}BEGIN{SUBSEP="/"}END{print H("shiny/gold",o,"1 one");print H("shiny/gold",i)}
 # day 08 ######################################################################
 function f(i,s,h){for(;!h[++i]++&&s=C[i];){s~/a/&&A+=s;s~/j/&&i+=s-1}return i}
 function hoo(k){return sub(/n/,"j",C[k])||sub(/j/,"n",C[k])}{C[NR]=$2$1}/n|j/{
